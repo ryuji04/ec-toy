@@ -26,16 +26,14 @@ public class ResisterUserController {
 		return "register_user";
 	}
 
-	@RequestMapping("regist")
+	@RequestMapping("register")
 	public String regist(UserForm form) {
 		User user = new User();
-		System.out.println("formの要素"+form);
 		BeanUtils.copyProperties(form, user);
 		user.setPassword(form.getPassword());
-System.out.println("user"+user);
 		registerUserService.registerUser(user);
-
-		return "login";
+		System.out.println("register-userを呼べました");
+		return "redirect:/login-user";
 
 	}
 }
