@@ -15,7 +15,7 @@ import com.example.repository.ResisterUserRepository;
  */
 @Service
 @Transactional
-public class ResisterUserService {
+public class RegisterUserService {
 	@Autowired
 	ResisterUserRepository resisterUserRepository;
 	

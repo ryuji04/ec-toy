@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.domain.User;
 import com.example.form.UserForm;
-import com.example.server.ResisterUserService;
+import com.example.server.RegisterUserService;
 
 /**
  * ユーザー情報を登録するコントローラー.
@@ -17,9 +17,9 @@ import com.example.server.ResisterUserService;
  */
 @Controller
 @RequestMapping("register-user")
-public class ResisterUserController {
+public class RegisterUserController {
 	@Autowired
-	public ResisterUserService registerUserService;
+	public RegisterUserService registerUserService;
 
 	@RequestMapping("")
 	public String index() {
