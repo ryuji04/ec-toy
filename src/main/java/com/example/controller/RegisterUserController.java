@@ -32,7 +32,6 @@ public class RegisterUserController {
 		BeanUtils.copyProperties(form, user);
 		user.setPassword(form.getPassword());
 		registerUserService.registerUser(user);
-		System.out.println("register-userを呼べました");
 		return "redirect:/login-user";
 
 	}

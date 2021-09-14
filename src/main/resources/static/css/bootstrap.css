@@ -10,6 +10,35 @@ html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
+
+/* 商品一覧について記述 
+
+
+
+.wrap{
+	display:flex;
+	flex-wrap:wrap;
+	justify-content:center;
+}
+
+.show-item{
+	margin: 1%;
+	border-radius: 10px;
+	flex: 0 0 290px;
+  padding: 20px;
+
+}
+
+.item-image{
+	width:200px !important;
+	height:200px !important;
+	display:block;
+	margin:auto;
+	padding-bottom:15px;
+}
+
+　*/
+
 body {
   margin: 0;
 }
