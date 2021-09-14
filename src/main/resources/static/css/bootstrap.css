@@ -11,6 +11,26 @@ html {
       -ms-text-size-adjust: 100%;
 }
 
+.table-row{
+	 display: table;
+  width: 100%;
+  margin: 0 auto;
+  table-layout: fixed;
+}
+
+.table-head{
+	 display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.item-image{
+	width:220px !important;
+	height:200px !important;
+	display:block;
+	margin:auto;
+	padding-bottom:15px;
+}
 /* ¤•iˆê——‚É‚Â‚¢‚Ä‹Lq 
 
 

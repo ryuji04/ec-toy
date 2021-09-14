@@ -6,6 +6,8 @@ package com.example.domain;
  *
  */
 public class Item {
+	/** ID */
+	private Integer id;
 	/** 商品の名前 */
 	private String name;
 	/** 商品価格(Mサイズ)　*/
@@ -14,6 +16,13 @@ public class Item {
 	private Integer price_l;
 	/**　商品画像のパス */
 	private String	image_path;
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -40,8 +49,8 @@ public class Item {
 	}
 	@Override
 	public String toString() {
-		return "Item [name=" + name + ", price_m=" + price_m + ", price_l=" + price_l + ", image_path=" + image_path
-				+ "]";
+		return "Item [id=" + id + ", name=" + name + ", price_m=" + price_m + ", price_l=" + price_l + ", image_path="
+				+ image_path + "]";
 	}
 	
 	

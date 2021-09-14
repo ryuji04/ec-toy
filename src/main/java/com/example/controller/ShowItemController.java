@@ -1,5 +1,7 @@
 package com.example.controller;
 
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +32,18 @@ public class ShowItemController {
 	 * @return 商品一覧画面へ遷移
 	 */
 	@RequestMapping("")
-	public String index() {
+	public String findAllItem(Model model) {
+		List<List<Item>>itemAllList=itemService.finadAllItem();
+		model.addAttribute("itemAllList", itemAllList);
+		
 		return "item_list_toy";
 	}
 	
-	@RequestMapping("findAll")
-	public String findAllItem(Model model) {
-		List<Item>itemList=itemService.finadAllItem();
+	@RequestMapping("findByName")
+	public String findByName(String name,Model model) {
+		List<List<Item>>itemAllList=itemService.findByname(name);
+		model.addAttribute("itemAllList", itemAllList);
 		
-		model.addAttribute("itemList", itemList);
 		return "item_list_toy";
 	}
 	
