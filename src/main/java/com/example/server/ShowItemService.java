@@ -18,7 +18,7 @@ import com.example.repository.ItemRepository;
  */
 @Service
 @Transactional
-public class ItemService {
+public class ShowItemService {
 	@Autowired
 	private ItemRepository itemRepository;
 	
@@ -68,13 +68,20 @@ public class ItemService {
 		
 	}
 	
+	/**
+	 * 商品情報を3つずつ格納するメソッド
+	 * 
+	 * @param perfectItemlList　商品情報リストを3つずつ格納するリスト
+	 * @param listInThreeItem　商品情報を3つずつ格納するリスト
+	 * @param itemList　商品情報が1つずつ格納されているリスト
+	 * @return 商品情報リスト3つずつ格納されたリスト(perfectItemlList)
+	 */
 	public List<List<Item>> setItemList(List<List<Item>> perfectItemlList,List<Item> listInThreeItem, List<Item>itemList){
 		
 				
 				//全ての商品を取り出す
 				for(int i=0;i<itemList.size();i++ ) {
 					listInThreeItem.add(itemList.get(i));
-					System.out.println("listInThreeItemの中身"+listInThreeItem);
 					if((i+1)%3==0) {
 						perfectItemlList.add(listInThreeItem);
 						listInThreeItem=new ArrayList<>();
@@ -84,10 +91,7 @@ public class ItemService {
 						perfectItemlList.add(listInThreeItem);
 					}
 					
-					System.out.println("listInThreeItemの中身"+listInThreeItem);
 							}
-				System.out.println("itemAllListの中身"+itemList);
-				System.out.println("perfectItemListの中身"+perfectItemlList);
 				
 				return perfectItemlList;
 	}

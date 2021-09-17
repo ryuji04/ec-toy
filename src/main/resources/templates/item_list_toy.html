@@ -61,8 +61,10 @@
 							<div class="form-group">
 								<label for="code" class="control-label col-sm-2">商品名</label>
 								<div class="col-sm-9">
+								
 									<input type="text" name="name" id="code"
 										class="form-control input-sm" />
+										
 								</div>
 							</div>
 							<div class="text-center">
@@ -87,7 +89,11 @@
 							<img  src="../static/img_toy/1.jpg" th:src="@{/img_toy/}+${item.image_path}"
 									class="img-responsive img-rounded item-img-center item-img-center item-image"
 									width="200" height="600">
-							</a><br> <a href="item_detail.html" th:text="${item.name}">じゃがバターベーコン</a><br>
+									
+							</a><br> 
+							
+							<a href="item_detail.html"  th:text="${item.name}" th:href="@{/show-itemDetail/?id=}+${item.id}">じゃがバターベーコン</a><br>
+						
 							 Mサイズ:<span class="price" th:text="${item.price_m}">&nbsp;М&nbsp;</span>円<br>
 								Lサイズ:<span class="price" th:text="${item.price_l}">&nbsp;Ｌ</span>円<br>
 							</th>
