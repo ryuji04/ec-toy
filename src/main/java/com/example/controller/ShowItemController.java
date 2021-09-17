@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.domain.Item;
-import com.example.server.ItemService;
+import com.example.server.ShowItemService;
 
 /**
  * 商品を表示するコントローラー.
@@ -24,7 +24,7 @@ import com.example.server.ItemService;
 @RequestMapping("show-item")
 public class ShowItemController {
 	@Autowired
-	private ItemService itemService;
+	private ShowItemService itemService;
 	
 	/**
 	 * 商品一覧画面を表示する.
@@ -39,6 +39,13 @@ public class ShowItemController {
 		return "item_list_toy";
 	}
 	
+	/**
+	 * 	商品名検索をするメソッド.
+	 * 
+	 * @param name  商品名
+	 * @param model　リクエストスコープ
+	 * @return　商品一覧画面へ遷移
+	 */
 	@RequestMapping("findByName")
 	public String findByName(String name,Model model) {
 		List<List<Item>>itemAllList=itemService.findByname(name);

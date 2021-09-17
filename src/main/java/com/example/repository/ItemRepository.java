@@ -26,6 +26,7 @@ public class ItemRepository {
 	private static final RowMapper<Item> ITEM_ROW_MAPPER = (rs, i) -> {
 		Item item = new Item();
 		item.setId(rs.getInt("id"));
+		item.setDescription(rs.getString("description"));
 		item.setName(rs.getString("name"));
 		item.setPrice_m(rs.getInt("price_m"));
 		item.setPrice_l(rs.getInt("price_l"));
@@ -39,15 +40,15 @@ public class ItemRepository {
 	 * @return 全ての商品情報
 	 */
 	public List<Item> findAll() {
-		String sql = "SELECT id,name,price_m,price_l,image_path FROM items";
+		String sql = "SELECT id,description,name,price_m,price_l,image_path FROM items";
 
 		List<Item> itemList = template.query(sql, ITEM_ROW_MAPPER);
-		return itemList;
 
+		return itemList;
 	}
-	
+
 	public List<Item>findLikeName(String name){
-		String sql = "SELECT id,name,price_m,price_l,image_path FROM items WHERE name LIKE :name";
+		String sql = "SELECT id,description,name,price_m,price_l,image_path FROM items WHERE name LIKE :name";
 		
 		SqlParameterSource param
 		=new MapSqlParameterSource().addValue("name","%"+name+"%");
@@ -55,6 +56,18 @@ public class ItemRepository {
 		List<Item>itemList=template.query(sql, param,ITEM_ROW_MAPPER);
 		
 		return itemList;
+		
+	}
+
+	public Item load(Integer id) {
+		String sql 
+		= "SELECT id,description,name,price_m,price_l,image_path FROM items WHERE id=:id";
+	
+		SqlParameterSource param
+		=new MapSqlParameterSource().addValue("id",id);
+		
+		Item item=template.queryForObject(sql, param,ITEM_ROW_MAPPER);
+		return item;
 		
 	}
 

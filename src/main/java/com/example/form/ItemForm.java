@@ -1,14 +1,15 @@
-package com.example.domain;
+package com.example.form;
 
 import java.util.List;
 
+import com.example.domain.Topping;
 /**
- * 商品情報のクラス.
+ * 商品情報のフォームクラス.
  * 
  * @author adachiryuji
  *
  */
-public class Item {
+public class ItemForm {
 	/** ID */
 	private Integer id;
 	/** 商品の名前 */
@@ -86,7 +87,4 @@ public class Item {
 				+ ", price_l=" + price_l + ", image_path=" + image_path + ", toppingList=" + toppingList + "]";
 	}
 
-	
-
-	
 }
