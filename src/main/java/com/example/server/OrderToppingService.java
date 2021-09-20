@@ -20,7 +20,8 @@ public class OrderToppingService {
 	@Autowired
 	public OrderItemService orderItemService;
 
-	public OrderTopping orderTopping(Integer itemId, Integer quantity, Character size, Topping topping) {
+	public OrderTopping orderTopping(Integer itemId, Integer quantity, Character size, int[] toppingId) {
+		System.out.println("topping"+topping);
 		OrderTopping orderTopping = new OrderTopping();
 		orderTopping.setToppingId(topping.getId());
 		orderTopping.setTopping(topping);

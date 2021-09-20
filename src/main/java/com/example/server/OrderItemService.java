@@ -20,13 +20,10 @@ public class OrderItemService {
 	@Autowired
 	public ItemRepository itemRepository;
 	
-	public OrderItem insertOrderItem(Integer itemId,Integer quantity,Character size) {
-		Item item=itemRepository.load(itemId);
+	public OrderItem insertOrderItem(Integer itemId,Integer quantity,Character size,int userId) {
 		
-		OrderItem orderItem=new OrderItem();
-		orderItem.setQuantity(quantity);
-		orderItem.setSize(size);
-		orderItem.setItem(item);
+		
+		
 		
 		return orderItem;
 		
