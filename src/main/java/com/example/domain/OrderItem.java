@@ -10,23 +10,27 @@ import java.util.List;
  */
 public class OrderItem {
 	private Integer id;
-	private Integer itemid;
+	private Integer itemId;
 	private Integer orderId;
 	private Integer quantity;
 	private Character size;
 	private Item item;
 	private List<OrderTopping>orderToppingList;
+	
+	public OrderItem() {
+	}
+	
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getItemid() {
-		return itemid;
+	public Integer getItemId() {
+		return itemId;
 	}
-	public void setItemid(Integer itemid) {
-		this.itemid = itemid;
+	public void setItemId(Integer itemId) {
+		this.itemId = itemId;
 	}
 	public Integer getOrderId() {
 		return orderId;
@@ -58,11 +62,38 @@ public class OrderItem {
 	public void setOrderToppingList(List<OrderTopping> orderToppingList) {
 		this.orderToppingList = orderToppingList;
 	}
+	
+	
+	public int getSubTotal() {
+		int itemPrice=0;
+		int toppingPrice=0;
+		if(size=='M') {
+			itemPrice=item.getPrice_m();
+		}
+		if(size=='L') {
+			itemPrice=item.getPrice_l();
+		}
+		
+		List<OrderTopping>orderToppingList2=orderToppingList;
+		for(OrderTopping orderTopping:orderToppingList2) {
+			Topping topping=orderTopping.getTopping();
+			if(size=='M') {
+				toppingPrice+=topping.getPrice_m();
+			}
+			if(size=='L') {
+				toppingPrice+=topping.getPrice_l();
+			}
+		}
+		return (itemPrice+toppingPrice)*quantity;
+		
+	}
+	
 	@Override
 	public String toString() {
-		return "OrderItem [id=" + id + ", itemid=" + itemid + ", orderId=" + orderId + ", quantity=" + quantity
+		return "OrderItem [id=" + id + ", itemId=" + itemId + ", orderId=" + orderId + ", quantity=" + quantity
 				+ ", size=" + size + ", item=" + item + ", orderToppingList=" + orderToppingList + "]";
 	}
+	
 	
 	
 

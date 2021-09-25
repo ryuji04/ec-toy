@@ -18,6 +18,10 @@ public class User {
 	private String address;
 	/** 電話番号　*/
 	private String telephone;
+	
+	public User() {
+	}
+	
 	public String getName() {
 		return name;
 	}

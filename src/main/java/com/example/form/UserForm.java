@@ -13,6 +13,10 @@ public class UserForm {
 	private String address;
 	/** 電話番号　*/
 	private String telephone;
+	
+	public UserForm() {
+	}
+	
 	public String getName() {
 		return name;
 	}

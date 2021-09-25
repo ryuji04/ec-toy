@@ -14,6 +14,10 @@ public class LoginUser {
 	private String email;
 	/**パスワード*/
 	private String password;
+	
+	public LoginUser() {
+	}
+	
 	public Integer getId() {
 		return id;
 	}

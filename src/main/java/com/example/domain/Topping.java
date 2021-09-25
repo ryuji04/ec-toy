@@ -14,6 +14,10 @@ public class Topping {
 	private Integer price_m;
 	/**サイズのトッピング*/
 	private Integer price_l;
+	
+	public Topping() {
+	}
+	
 	public Integer getId() {
 		return id;
 	}

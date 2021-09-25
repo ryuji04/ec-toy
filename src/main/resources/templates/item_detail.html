@@ -46,10 +46,11 @@
 			<!-- /.container-fluid -->
 		</nav>
 
-		<form action="cart_list.html" th:action="@{/order-item}">
+		<form action="cart_list.html" th:action="@{/add-item/add-cart}">
 		<!-- 商品情報IDをhiddenでOrderItemControllerに送る -->
 		<input name="itemId" type="hidden" th:value="${item.id}">
-		
+		<input name="userId" th:if="${session.loginUser}" type="hidden" th:value="${session.loginUser.id}">
+	
 		<div class="row">
 			<div class="col-xs-offset-2 col-xs-8">
 
@@ -78,14 +79,14 @@
 								<span>&nbsp;M:</span>
 									<label class="radio-inline">
 										<input type="radio"
-											name="size" checked="checked" th:value="${item.price_m}" th:text="${item.price_m}">円(税抜)
+											 name="size" checked="checked" th:value="M" th:text="${item.price_m}">円(税抜)
 										<!-- <span class="price" >&nbsp;М&nbsp;</span>&nbsp;&nbsp;円(税抜)-->
 										
 									</label>
 									<span>&nbsp;L:</span>
 									<label class="radio-inline">
 										<input type="radio"
-											name="size" th:value="${item.price_l}"  th:text="${item.price_l}">円(税抜)
+											 name="size" th:value="L"  th:text="${item.price_l}">円(税抜)
 											
 										<!-- <span class="price">&nbsp;Ｌ</span>&nbsp;&nbsp; -->
 										
@@ -108,7 +109,7 @@
 								</div>
 								<div class="col-sm-12">
 								<label class="checkbox-inline" th:each="topping:${item.toppingList}">
-										<input name="toppingId" type="checkbox"  th:text="${topping.name}" value="" th:value="${topping.id}">
+										<input name="toppingList" type="checkbox"  th:text="${topping.name}" value="" th:value="${topping.id}">
 									<span>&nbsp;</span>
 									</label>
 								

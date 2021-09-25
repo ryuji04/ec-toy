@@ -16,6 +16,9 @@ public class OrderTopping {
 	/**トッピング情報*/
 	private Topping topping;
 	
+	public OrderTopping() {
+	}
+	
 	public Integer getId() {
 		return id;
 	}

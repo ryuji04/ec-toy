@@ -9,6 +9,10 @@ public class LoginUserForm2 {
 	private String email;
 	/**パスワード*/
 	private String password;
+	
+	public LoginUserForm2() {
+	}
+	
 	public Integer getId() {
 		return id;
 	}
