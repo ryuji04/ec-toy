@@ -6,6 +6,8 @@ package com.example.controller;
  *
  */
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,9 @@ public class LoginUserController {
 	@Autowired
 	public LoginUserService loginUserService;
 	
+	@Autowired
+	public HttpSession session;
+	
 	@RequestMapping("")
 	public String index() {
 		return "login";
@@ -32,6 +37,16 @@ public class LoginUserController {
 			return "login";
 		}
 		
+		session.setAttribute("loginUser",loginUser);
+		
+		
 		return "redirect:/show-item";
+	}
+	
+	@RequestMapping("logout")
+	public String logout() {
+		session.removeAttribute("loginUser");
+		
+		return "login";
 	}
 }

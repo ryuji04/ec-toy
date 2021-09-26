@@ -24,6 +24,10 @@ public class ItemForm {
 	private String image_path;
 	/** トッピング情報を格納する為のリスト */
 	private List<Topping> toppingList;
+	
+
+	public ItemForm() {
+	}
 
 	public Integer getId() {
 		return id;
