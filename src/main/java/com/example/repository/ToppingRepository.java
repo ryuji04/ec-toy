@@ -43,6 +43,12 @@ public class ToppingRepository {
 		return toppingList;
 	}
 
+	/**
+	 * トッピングIDからトッピング情報を取得するメソッドです.
+	 * 
+	 * @param id ID
+	 * @return toppingListが空⇒null toppinListが作成される⇒最初に作成されたトッピング情報
+	 */
 	public Topping findByToppingId(Integer id) {
 		String sql = "SELECT id,name,price_m,price_l FROM toppings WHERE id=:id";
 
@@ -56,5 +62,7 @@ public class ToppingRepository {
 
 		return toppingList.get(0);
 	}
+
+	
 
 }

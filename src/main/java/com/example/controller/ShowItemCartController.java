@@ -29,7 +29,6 @@ public class ShowItemCartController {
 	
 	@RequestMapping("")
 	public String showCart(Integer userId) {
-			System.out.println("loginUserの中身(変換前)"+session.getAttribute("loginUser"));
 			
 			LoginUser loginUser=new LoginUser();
 			loginUser=(LoginUser)session.getAttribute("loginUser");
@@ -38,7 +37,6 @@ public class ShowItemCartController {
 			//OrderRepository orderRepository=new OrderRepository();
 			Order order=orderRepository.findByUserIdAndStatus(loginUser.getId(),0);
 			
-			System.out.println("orderの中身"+order);
 			
 			session.setAttribute("order", order);
 			

@@ -51,7 +51,6 @@ public class AddItemService {
 			order.setStatus(status);
 			order.setTotalPrice(0);
 
-			System.out.println("ordr(service):" + order);
 
 			// OrderItemのgetSubTotal()を使う。今回はまだ作成していない
 

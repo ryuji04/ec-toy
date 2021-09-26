@@ -44,7 +44,6 @@ public class AddItemController {
 	@RequestMapping("add-cart")
 	public String addCart(AddItemForm form,Integer userId) {
 
-		System.out.println("AddItemForm:"+form);
 		
 		
 		addItemService.add(form,userId,0);
