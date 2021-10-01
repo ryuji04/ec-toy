@@ -19,7 +19,24 @@ public class OrderService {
 	@Autowired
 	private OrderRepository orderRepository;
 	
+	/**
+	 * ユーザーIdから注文情報を取得する.
+	 * 
+	 * @param userId ユーザーId
+	 * @return 注文情報
+	 */
 	public Order findByUserId(Integer userId) {
 		return orderRepository.findByUserId(userId);
 	}
+	
+	public Order findByUserIdAndStatus(Integer userId,Integer status) {
+		return orderRepository.findByUserIdAndStatus(userId, status);
+	}
 }
+
+
+
+
+
+
+

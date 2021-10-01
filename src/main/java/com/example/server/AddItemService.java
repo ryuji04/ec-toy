@@ -49,7 +49,7 @@ public class AddItemService {
 			Order order = new Order();
 			order.setUserId(userId);
 			order.setStatus(status);
-			order.setTotalPrice(0);
+			order.setTotalPrice(orderItem.getSubTotal());
 
 
 			// OrderItemのgetSubTotal()を使う。今回はまだ作成していない

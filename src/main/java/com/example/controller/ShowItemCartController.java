@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.domain.LoginUser;
 import com.example.domain.Order;
-import com.example.repository.OrderRepository;
+import com.example.server.OrderService;
 
 /**
  * カートの中を表示するクラス/
@@ -24,9 +24,14 @@ public class ShowItemCartController {
 	private HttpSession session;
 	
 	@Autowired
-	public OrderRepository orderRepository;
+	public OrderService orderService;
 
 	
+	/**
+	 * ログインユーザーIDから注文情報を取得する.
+	 * @param userId ユーザーID
+	 * @return 注文情報
+	 */
 	@RequestMapping("")
 	public String showCart(Integer userId) {
 			
@@ -35,7 +40,7 @@ public class ShowItemCartController {
 			
 			
 			//OrderRepository orderRepository=new OrderRepository();
-			Order order=orderRepository.findByUserIdAndStatus(loginUser.getId(),0);
+			Order order=orderService.findByUserIdAndStatus(loginUser.getId(),0);
 			
 			
 			session.setAttribute("order", order);
