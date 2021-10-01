@@ -9,7 +9,7 @@ import java.util.List;
  *
  */
 public class OrderItem {
-	private Integer id;
+	private Integer id; 
 	private Integer itemId;
 	private Integer orderId;
 	private Integer quantity;
@@ -84,7 +84,7 @@ public class OrderItem {
 				toppingPrice+=topping.getPrice_l();
 			}
 		}
-		return (itemPrice+toppingPrice)*quantity;
+		return (itemPrice*quantity)+toppingPrice;
 		
 	}
 	

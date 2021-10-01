@@ -31,7 +31,6 @@ public class OrderItemService {
 	public void deleteOrderItemAndOrderToppingById(Integer id) {
 		
 		OrderItem orderItem=orderItemRepository.findById(id);
-		System.out.println("orderItem:"+orderItem);
 		orderToppingRepository.deleteByOrderItemId(orderItem.getId());
 		orderItemRepository.deleteById(id);
 		

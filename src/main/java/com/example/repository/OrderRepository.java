@@ -31,17 +31,20 @@ public class OrderRepository {
 	@Autowired
 	private NamedParameterJdbcTemplate template;
 
-	private static final ResultSetExtractor<List<Order>> OREDER_ROW_MAPPER = (rs) -> {
-		List<Order> orderList = new ArrayList<>();
-		List<OrderItem> orderItemList = null;
-		List<OrderTopping> orderToppingList = null;
-		List<Topping> toppingList = null;
-		int idNumber = 0;
-		int orderItemNumber = 0;
-		while (rs.next()) {
-			int nowIdNumber = rs.getInt("id");
-			if (idNumber != nowIdNumber) {
-				Order order = new Order();
+	private static final ResultSetExtractor<List<Order>>OREDER_ROW_MAPPER
+	=(rs)->{
+		List<Order>orderList=null;
+		List<OrderItem>orderItemList=null;
+		List<OrderTopping>orderToppingList=null;
+		
+		int beforeId=0;
+		int beforeOrderItemId=0;
+		
+		while(rs.next()) {
+			int nowId=rs.getInt("id");
+			
+			if(beforeId!=nowId) {
+				Order order=new Order();
 				order.setId(rs.getInt("id"));
 				order.setUserId(rs.getInt("user_id"));
 				order.setStatus(rs.getInt("status"));
@@ -54,64 +57,76 @@ public class OrderRepository {
 				order.setDestinationTel(rs.getString("destination_tel"));
 				order.setDeliveryTime(rs.getTimestamp("delivery_time"));
 				order.setPaymentMethod(rs.getInt("payment_method"));
-				orderItemList = new ArrayList<>();
+				
+				orderItemList=new ArrayList<>();
 				order.setOrderItemList(orderItemList);
+				
+				orderList=new ArrayList<>();
 				orderList.add(order);
 			}
-
-			if (rs.getInt("oi_id") != 0 && orderItemNumber != rs.getInt("oi_id")) {
-				OrderItem orderItem = new OrderItem();
-				orderItem.setId(rs.getInt("oi_id"));
-				orderItem.setItemId(rs.getInt("oi_item_id"));
-				orderItem.setOrderId(rs.getInt("oi_order_id"));
-				orderItem.setQuantity(rs.getInt("oi_quantity"));
-				String size = rs.getString("oi_size");
-				char[] c = size.toCharArray();
-				orderItem.setSize(c[0]);
-				orderToppingList = new ArrayList<>();
-				orderItem.setOrderToppingList(orderToppingList);
-				orderItemList.add(orderItem);
-				Item item = new Item();
-				item.setId(rs.getInt("i_id"));
-				item.setName(rs.getString("i_name"));
-				item.setDescription(rs.getString("i_description"));
-				item.setPrice_m(rs.getInt("i_price_m"));
-				item.setPrice_l(rs.getInt("i_price_l"));
-				item.setImage_path(rs.getString("i_image_path"));
-				item.setDeleted(rs.getBoolean("i_deleted"));
-				orderItem.setItem(item);
+			
+			if(rs.getInt("oi_id")!=0) {
+				if(beforeOrderItemId!=rs.getInt("oi_id")) {
+					OrderItem orderItem=new OrderItem();
+					orderItem.setId(rs.getInt("oi_id"));
+					orderItem.setItemId(rs.getInt("oi_item_id"));
+					orderItem.setOrderId(rs.getInt("oi_order_id"));
+					orderItem.setQuantity(rs.getInt("oi_quantity"));
+					String c=rs.getString("oi_size");
+					char[]size=c.toCharArray();
+					for(char size2:size) {
+						orderItem.setSize(size2);
+					}
+					
+					Item item =new Item();
+					item.setId(rs.getInt("i_id"));
+					item.setName(rs.getString("i_name"));
+					item.setDescription(rs.getString("i_description"));
+					item.setPrice_m(rs.getInt("i_price_m"));
+					item.setPrice_l(rs.getInt("i_price_l"));
+					item.setImage_path(rs.getString("i_image_path"));
+					item.setDeleted(rs.getBoolean("i_deleted"));
+					
+					List<Topping>toppingList=new ArrayList<>();
+					item.setToppingList(toppingList);
+					orderItem.setItem(item);
+					
+					orderItemList.add(orderItem);
+					
+					orderToppingList=new ArrayList<>();
+					orderItem.setOrderToppingList(orderToppingList);
+				}
+				
+				if(rs.getInt("ot_id")!=0) {
+					OrderTopping orderTopping=new OrderTopping();
+					orderTopping.setId(rs.getInt("ot_id"));
+					orderTopping.setToppingId(rs.getInt("ot_topping_id"));
+					orderTopping.setOrderItemId(rs.getInt("ot_order_item_id"));
+					
+					Topping topping=new Topping();
+					topping.setId(rs.getInt("t_id"));
+					topping.setName(rs.getString("t_name"));
+					topping.setPrice_m(rs.getInt("t_price_m"));
+					topping.setPrice_l(rs.getInt("t_price_l"));
+					
+					orderTopping.setTopping(topping);
+					orderToppingList.add(orderTopping);
+				}
+				beforeOrderItemId=rs.getInt("oi_id");
+				beforeId=nowId;
 			}
-
-			if (rs.getInt("ot_id") != 0) {
-				OrderTopping orderTopping = new OrderTopping();
-				orderTopping.setId(rs.getInt("ot_id"));
-				orderTopping.setToppingId(rs.getInt("ot_topping_id"));
-				orderTopping.setOrderItemId(rs.getInt("ot_order_item_id"));
-				orderToppingList.add(orderTopping);
-				Topping topping = new Topping();
-				topping.setId(rs.getInt("t_id"));
-				topping.setName(rs.getString("t_name"));
-				topping.setPrice_m(rs.getInt("t_price_m"));
-				topping.setPrice_l(rs.getInt("t_price_l"));
-				toppingList = new ArrayList<>();
-				toppingList.add(topping);
-				orderTopping.setTopping(topping);
-			}
-			idNumber = nowIdNumber;
-			orderItemNumber = rs.getInt("oi_id");
-
+			
 		}
 		return orderList;
-
+		
 	};
-
+	
 	public Order insertOrder(Order order) {
 		String sql = "INSERT INTO orders(user_id,status,total_price,order_date, destination_name,destination_email,\r\n"
 				+ "destination_zipcode,destination_address,destination_tel,delivery_time,payment_method)\r\n"
 				+ " VALUES (:userId,:status,:totalPrice,:orderDate,:destinationName,:destinationEmail,:destinationZipcode,:destinationAddress,:destinationTel,"
 				+ " :deliveryTime,:paymentMethod);";
 
-		System.out.println("Order" + order);
 
 		SqlParameterSource param = new BeanPropertySqlParameterSource(order);
 
@@ -156,7 +171,6 @@ public class OrderRepository {
 				+ "	LEFT OUTER JOIN order_items AS oi ON o.id=oi.order_id LEFT OUTER JOIN items AS i ON oi.item_id=i.id LEFT OUTER JOIN"
 				+ "	order_toppings AS ot ON oi.id=ot.order_item_id LEFT OUTER JOIN toppings AS t ON t.id=ot.topping_id "
 				+ "	WHERE o.user_id=:userId;";
-		System.out.println("userIdの中身:" + userId);
 		SqlParameterSource param = new MapSqlParameterSource().addValue("userId", userId);
 
 		List<Order> orderList = template.query(sql, param, OREDER_ROW_MAPPER);

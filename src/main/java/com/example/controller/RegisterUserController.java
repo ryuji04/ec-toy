@@ -16,7 +16,7 @@ import com.example.server.RegisterUserService;
  *
  */
 @Controller
-@RequestMapping("register-user")
+@RequestMapping("/register-user")
 public class RegisterUserController {
 	@Autowired
 	public RegisterUserService registerUserService;

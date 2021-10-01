@@ -1,17 +1,19 @@
-package com.example.domain;
+package com.example.form;
 
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import com.example.domain.OrderItem;
+import com.example.domain.User;
 
 /**
- * 注文情報のクラス.
+ * 注文情報のフォームクラス.
  * 
  * @author adachiryuji
  *
  */
-public class Order {
+public class OrderForm {
 	private Integer id;
 	private Integer userId;
 	private Integer status;
@@ -27,7 +29,7 @@ public class Order {
 	private User user;
 	private List<OrderItem>orderItemList;
 	
-	public Order() {
+	public OrderForm() {
 	}
 	
 	public Integer getId() {
@@ -143,7 +145,6 @@ public class Order {
 				+ destinationAddress + ", destinationTel=" + destinationTel + ", deliveryTime=" + deliveryTime
 				+ ", paymentMethod=" + paymentMethod + ", user=" + user + ", orderItemList=" + orderItemList + "]";
 	}
-	
 	
 	
 	
