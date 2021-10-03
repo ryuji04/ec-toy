@@ -9,15 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.domain.Order;
 import com.example.domain.OrderItem;
 import com.example.domain.OrderTopping;
-import com.example.domain.Topping;
 import com.example.form.AddItemForm;
 import com.example.repository.ItemRepository;
 import com.example.repository.OrderItemRepository;
 import com.example.repository.OrderRepository;
 import com.example.repository.OrderToppingRepository;
-import com.example.repository.ToppingRepository;
-
-import ch.qos.logback.core.net.SyslogOutputStream;
 
 /**
  * カートに入れる商品情報のサービス.
@@ -36,10 +32,16 @@ public class AddItemService {
 
 	@Autowired
 	public OrderToppingRepository orderToppingRepository;
+	
+	@Autowired
+	public ItemRepository itemRepository;
 
 	public void add(AddItemForm form, Integer userId, Integer status) {
 		// OrderがあってもなくてもOrderItemはインサートする必要あるからインスタンス化しておく
 		OrderItem orderItem = new OrderItem();
+		
+		
+		
 
 		Order returnOrder = orderRepository.findByUserIdAndStatus(userId, status);
 		if (returnOrder == null) {
@@ -49,12 +51,12 @@ public class AddItemService {
 			Order order = new Order();
 			order.setUserId(userId);
 			order.setStatus(status);
-			order.setTotalPrice(orderItem.getSubTotal());
+			order.setTotalPrice(0);
 
-
-			// OrderItemのgetSubTotal()を使う。今回はまだ作成していない
 
 			Order returnOrder2 = orderRepository.insertOrder(order);
+			// OrderItemのgetSubTotal()を使う。今回はまだ作成していない
+
 
 			// OrderItemに情報をセットする.
 			orderItem.setItemId(form.getItemId());

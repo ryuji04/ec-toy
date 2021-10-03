@@ -32,6 +32,16 @@ public class OrderService {
 	public Order findByUserIdAndStatus(Integer userId,Integer status) {
 		return orderRepository.findByUserIdAndStatus(userId, status);
 	}
+	
+	public Order insertOrder(Order order) {
+		Order returnOrder=orderRepository.insertOrder(order);
+		return returnOrder;
+	}
+	
+	public void update(Order order,Integer orderId) {
+		orderRepository.update(order,orderId);
+		System.out.println("orderId:"+orderId);
+	}
 }
 
 

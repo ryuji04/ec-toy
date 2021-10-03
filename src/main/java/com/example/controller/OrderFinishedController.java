@@ -31,7 +31,8 @@ public class OrderFinishedController {
 	private HttpSession session;
 	
 	@Autowired
-	public OrderService orderService;
+	private OrderService orderService;
+	
 	
 	@RequestMapping("")
 	public String orderFinished(OrderForm form,String deliveryData,String responsibleCompany,String status)throws Exception  {
@@ -60,7 +61,10 @@ public class OrderFinishedController {
 			//テスト用１０時～１８時の時間を作成
 			//LocalDateTime freeTime=LocalDateTime.of(2021,10,01,15,20,30);
 			
-			System.out.println("plusTime"+plusTime);
+			LoginUser loginUser=new LoginUser();
+			loginUser=(LoginUser)session.getAttribute("loginUser");
+			
+			
 			if(desiredDate.before(nowTime)) {
 				System.out.println("希望時間が現在日時より前です");
 				return "forward:order-confirm";
@@ -69,12 +73,15 @@ public class OrderFinishedController {
 				return "forward:order-confirm";
 			}
 			
-			LoginUser loginUser=new LoginUser();
-			loginUser=(LoginUser)session.getAttribute("loginUser");
 			
-			Order order=orderService.findByUserId(loginUser.getId());
+			Order order=orderService.findByUserIdAndStatus(loginUser.getId(),0);
+			BeanUtils.copyProperties(form, order);
+			order.setUserId(loginUser.getId());
+			order.setOrderDate(nowTime);;
+			order.setDeliveryTime(desiredDate);
 			
-			BeanUtils.copyProperties(form,order);
+			
+			orderService.update(order,order.getId());
 			
 			
 		   
