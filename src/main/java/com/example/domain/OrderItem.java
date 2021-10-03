@@ -67,20 +67,20 @@ public class OrderItem {
 	public int getSubTotal() {
 		int itemPrice=0;
 		int toppingPrice=0;
-		if(size=='M') {
+		if(this.size=='M') {
 			itemPrice=item.getPrice_m();
 		}
-		if(size=='L') {
+		if(this.size=='L') {
 			itemPrice=item.getPrice_l();
 		}
 		
 		List<OrderTopping>orderToppingList2=orderToppingList;
 		for(OrderTopping orderTopping:orderToppingList2) {
 			Topping topping=orderTopping.getTopping();
-			if(size=='M') {
+			if(this.size=='M') {
 				toppingPrice+=topping.getPrice_m();
 			}
-			if(size=='L') {
+			if(this.size=='L') {
 				toppingPrice+=topping.getPrice_l();
 			}
 		}

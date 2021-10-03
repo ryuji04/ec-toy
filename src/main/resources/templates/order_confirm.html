@@ -181,6 +181,8 @@
 
 		<!-- table -->
 		<form action="order_finished.html" th:action="@{/order-finished}">
+		<input type="hidden" name="totalPrice" th:value="${session.order.getCalcTotalPrice()}"> 
+		<input type="hidden" name="id" th:value="${session.order.id}">	
 			<div class="row">
 				<div
 					class="table-responsive col-lg-offset-3 col-lg-6 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
@@ -343,7 +345,7 @@
 										<div class="col-sm-12">
 											<label class="radio-inline">
 												<input type="radio"
-													name="status" checked="checked">
+													name="status" th:value="1" checked="checked">
 												代金引換
 											</label>
 										</div>
@@ -361,7 +363,7 @@
 										<div class="col-sm-12">
 											<label class="radio-inline">
 												<input type="radio"
-													name="status" checked="checked">
+													name="status" th:value="2" checked="checked">
 												クレジットカード
 											</label><br><br>
 										</div>
