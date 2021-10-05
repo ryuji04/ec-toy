@@ -35,7 +35,6 @@ public class OrderConfirmControllder {
 		LoginUser loginUser=new LoginUser();
 		
 	loginUser=(LoginUser)session.getAttribute("loginUser");
-	System.out.println("loginUser:"+loginUser);
 	
 	
 	Order order=orderService.findByUserIdAndStatus(loginUser.getId(),0);

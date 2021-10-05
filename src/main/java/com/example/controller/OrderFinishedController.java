@@ -33,8 +33,13 @@ public class OrderFinishedController {
 	@Autowired
 	private OrderService orderService;
 	
-	
 	@RequestMapping("")
+	public String index() {
+		return "order_finished";
+	}
+	
+	
+	@RequestMapping("orderFinished")
 	public String orderFinished(OrderForm form,String deliveryData,String responsibleCompany,String status)throws Exception  {
 		
 		//Timestampの使い方を確認しながら記述、リクエストパラメーターで受け取ったデータと現在の日時を比較する
@@ -46,7 +51,6 @@ public class OrderFinishedController {
 			Date date =simpleDateFormat1.parse(deliverytime);
 			Timestamp desiredDate=new Timestamp(date.getTime());
 			LocalDateTime desiredDateTimeToLocal=desiredDate.toLocalDateTime();
-			System.out.println("desiredDate"+desiredDate);
 			
 			//現在時刻のタイムスタンプと、現在から3時間後のタイムスタンプを作成する.
 			
@@ -66,10 +70,8 @@ public class OrderFinishedController {
 			
 			
 			if(desiredDate.before(nowTime)) {
-				System.out.println("希望時間が現在日時より前です");
 				return "forward:order-confirm";
 			}if(nowLocalDateTime.isBefore(desiredDateTimeToLocal)&&desiredDateTimeToLocal.isBefore(plusTime)) {
-				System.out.println("３時間後の設定時刻を選択してください");
 				return "forward:order-confirm";
 			}
 			
@@ -85,6 +87,6 @@ public class OrderFinishedController {
 			
 			
 		   
-		   return "order_finished";
+		   return "redirect:";
 	}
 }

@@ -22,7 +22,6 @@ public class DeleteOrderItemController {
 	public String deleteOrderItem(Integer orderItemId) {
 		orderItemService.deleteOrderItemAndOrderToppingById(orderItemId);
 		
-		System.out.println("orderItemId:"+orderItemId);
 		return "redirect:/show-cart";
 	}
 }

@@ -33,8 +33,35 @@ public class OrderItemService {
 		OrderItem orderItem=orderItemRepository.findById(id);
 		orderToppingRepository.deleteByOrderItemId(orderItem.getId());
 		orderItemRepository.deleteById(id);
-		
-		
-		
 	}
+	/**
+	 * 注文情報IDから注文情報を取得する.
+	 * 
+	 * @param orderItemId　注文情報ID
+	 * @return 注文情報
+	 */
+	
+	public OrderItem findByIdForHistory(Integer orderItemId) {
+		OrderItem orderItem=orderItemRepository.findByIfForHistory(orderItemId);
+		
+		return orderItem;
+	}
+	
+	/**
+	 * 注文情報を挿入する.
+	 * 
+	 * @param orderItem 注文情報
+	 */
+	public void insert(OrderItem orderItem) {
+		orderItemRepository.insert(orderItem);
+	}
+	
+	public OrderItem findById(Integer orderItemId) {
+		return orderItemRepository.findById(orderItemId);
+	}
+	
+	public void update(OrderItem orderItem,Integer orderId) {
+		orderItemRepository.update(orderItem, orderId);
+	}
+	 
 }
