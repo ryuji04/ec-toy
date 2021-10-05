@@ -22,13 +22,13 @@ import com.example.server.AddItemService;
 @Controller
 @RequestMapping("add-item")
 public class AddItemController {
-	
+
 	@Autowired
 	public AddItemService addItemService;
-	
+
 	@Autowired
 	public HttpSession session;
-	
+
 	/**
 	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
 	 * 
@@ -38,17 +38,12 @@ public class AddItemController {
 	public AddItemForm setUpForm() {
 		return new AddItemForm();
 	}
-	
-	
-	
-	@RequestMapping("add-cart")
-	public String addCart(AddItemForm form,Integer userId) {
 
-		
-		
-		addItemService.add(form,userId,0);
-		
-		
+	@RequestMapping("add-cart")
+	public String addCart(AddItemForm form, Integer userId) {
+
+		addItemService.add(form, userId, 0);
+
 		return "redirect:/show-cart";
 	}
 }

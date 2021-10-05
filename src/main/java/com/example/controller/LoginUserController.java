@@ -38,9 +38,10 @@ public class LoginUserController {
 		}
 		
 		session.setAttribute("loginUser",loginUser);
+		session.setAttribute("message", loginUser.getName()+"さん,こんにちは!");
 		
 		
-		return "redirect:/show-item";
+		return "forward:/show-item";
 	}
 	
 	@RequestMapping("logout")
