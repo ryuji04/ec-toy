@@ -13,10 +13,10 @@ public class LoginUserForm {
 	/**ID*/
 	private Integer id;
 	/**ユーザー名*/
-	@NotBlank(message="名前は必須です")
 	private String name;
 	/**メールアドレス*/
 	@Email(message="Eメール形式が不正です")
+	@NotBlank(message="Emailは必須です")
 	private String email;
 	/**パスワード*/
 	@NotBlank(message="パスワードは必須です")
