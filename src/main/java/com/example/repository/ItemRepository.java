@@ -70,5 +70,31 @@ public class ItemRepository {
 		return item;
 		
 	}
+	
+	/**
+	 * 商品を降順に検索します.
+	 * 
+	 * @return 全ての商品情報
+	 */
+	public List<Item> sortInDesc() {
+		String sql = "SELECT id,description,name,price_m,price_l,image_path FROM items order by price_m desc";
+
+		List<Item> itemList = template.query(sql, ITEM_ROW_MAPPER);
+
+		return itemList;
+	}
+	
+	/**
+	 * 商品を昇順に検索します.
+	 * 
+	 * @return 全ての商品情報
+	 */
+	public List<Item> sortInAsc() {
+		String sql = "SELECT id,description,name,price_m,price_l,image_path FROM items order by price_m asc";
+
+		List<Item> itemList = template.query(sql, ITEM_ROW_MAPPER);
+
+		return itemList;
+	}
 
 }

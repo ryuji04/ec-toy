@@ -72,9 +72,22 @@
 							</div>
 							<div class="text-center">
 								<button type="submit" value="検索" class="btn btn-primary">検索</button>
+								</form>
 								<button type="reset" value="クリア" class="btn btn-default">クリア</button>
+								<form method="post" th:action="@{/show-item/sortItem}" th:object="${sortItemForm}">
+								
+								<div align="center" style="padding-top:10px;">
+								<select  name="sortItem" th:onChange="submit(this.form)" class="form-control btn btn-warning btn-block" 
+								style="width:20%;justify-content:center;">
+								
+								<option th:value="0" th:field="*{sortItem}">商品:追加順</option>
+								<option th:value="1" th:field="*{sortItem}">商品価格:降順</option>
+								<option th:value="2" th:field="*{sortItem}">商品価格:昇順</option>
+								</select>
+								</div>
+								</form>
 							</div>
-							</form>
+							
 					</div>
 				</div>
 			</div>
