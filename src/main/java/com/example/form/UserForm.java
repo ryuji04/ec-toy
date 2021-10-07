@@ -14,16 +14,18 @@ public class UserForm {
 	private String email;
 	/**　パスワード */
 	@NotBlank(message="パスワードの入力は必須です")
-	@Pattern(regexp="(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\\d)(?=.*?[+-/_])[a-zA-Z\\d+-/_]{8,16}",message="正常にエラーが作動")
+	@Pattern(regexp="(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\\d)(?=.*?[+-/_])[a-zA-Z\\d+-/_]{8,16}",message="8文字以上16文字以内で記入願います")
 	private String password;
 	/** 郵便番号　*/
 	@NotBlank(message="郵便番号の入力は必須です")
+	@Pattern(regexp="^[0-9]{3}-[0-9]{4}$",message="XXX-XXXXの形式で入力願います")
 	private String zipCode;
 	/**　住所 */
 	@NotBlank(message="住所の入力は必須です")
 	private String address;
 	/** 電話番号　*/
 	@NotBlank(message="電話番号の入力は必須です")
+	@Pattern(regexp="^[0-9]{3}-[0-9]{4}-[0-9]{4}$",message="XXX-XXXX-XXXXの形式で入力願います")
 	private String telephone;
 	
 	/**確認用パスワード*/

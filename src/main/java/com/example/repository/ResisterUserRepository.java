@@ -1,5 +1,7 @@
 package com.example.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -53,6 +55,15 @@ public class ResisterUserRepository {
 
 		User user = template.queryForObject(sql, param, USSER_ROW_MAPPER);
 		return user;
+
+	}
+	
+	public List<User> findAll() {
+		String sql = "SELECT id,name,email,password,zipcode,address,telephone from users";
+
+
+		List<User>userList = template.query(sql,USSER_ROW_MAPPER);
+		return userList;
 
 	}
 
