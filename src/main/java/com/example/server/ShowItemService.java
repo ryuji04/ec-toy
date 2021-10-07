@@ -27,7 +27,7 @@ public class ShowItemService {
 	 * 
 	 * @return　全件検索された商品(商品を3つずつ表示したいので、lsitの中にlistを入れている)
 	 */
-	public List<List<Item>> finadAllItem(){
+	public List<List<Item>> findAllItem(){
 		
 		//商品が3つずつ格納されるlistを作成
 		List<List<Item>>perfectItemlList=new ArrayList<>();
@@ -96,6 +96,47 @@ public class ShowItemService {
 				return perfectItemlList;
 	}
 	
+	/**
+	 * 降順に商品を検索する.
+	 * 
+	 * @return 商品情報
+	 */
+	public  List<List<Item>> sortInDesc() {
+		//商品が3つずつ格納されるlistを作成
+				List<List<Item>>perfectItemlList=new ArrayList<>();
+				
+				//商品を3つずつ格納するためのlistを作成
+				List<Item> listInThreeItem=new ArrayList<>();
+				
+				//itemAllListに全ての商品を格納
+				List<Item>itemList=itemRepository.sortInDesc();
+				
+				
+				List<List<Item>> itemAll = setItemList(perfectItemlList,listInThreeItem,itemList);
+				
+				return itemAll;
+	}
+	
+	/**
+	 * 昇順に商品を検索する.
+	 * 
+	 * @return 商品情報
+	 */
+	public  List<List<Item>> sortInAsc() {
+		//商品が3つずつ格納されるlistを作成
+		List<List<Item>>perfectItemlList=new ArrayList<>();
+		
+		//商品を3つずつ格納するためのlistを作成
+		List<Item> listInThreeItem=new ArrayList<>();
+		
+		//itemAllListに全ての商品を格納
+		List<Item>itemList=itemRepository.sortInAsc();
+		
+		
+		List<List<Item>> itemAll = setItemList(perfectItemlList,listInThreeItem,itemList);
+		
+		return itemAll;
+	}
 }
 
 

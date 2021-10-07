@@ -50,19 +50,21 @@
 				class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12">
 				<div class="well">
 					<form method="post" action="item_list_pizza.html"
-						th:action="@{/login-user/login}">
+						th:action="@{/login-user/login}" th:object=${loginUserForm}>
 						<fieldset>
 							<legend> ログイン </legend>
-							<label class="control-label" style="color: red" for="inputError">メールアドレス、またはパスワードが間違っています</label>
+							<!-- 
+							<label class="control-label"  style="color: red" for="inputError">メールアドレス、またはパスワードが間違っています</label>
+							 -->
 							<div class="form-group">
-								<label for="inputEmail">メールアドレス:</label> <input type="text"
+								<label th:errors="*{email}" for="inputEmail" style="color: red">メールアドレス:</label> <input type="text"
 									name="email" id="inputEmail" class="form-control"
-									placeholder="Email">
+									placeholder="Email" th:field="*{email}">
 							</div>
 							<div class="form-group">
-								<label for="inputPassword">パスワード:</label> <input type="text"
+								<label th:errors="*{password}" for="inputPassword" style="color: red">パスワード:</label> <input type="text"
 									name="password" id="inputPassword" class="form-control"
-									placeholder="Password">
+									placeholder="Password"  th:field="*{password}">
 							</div>
 							<div class="form-group">
 								<button type="submit" class="btn btn-primary">ログイン</button>

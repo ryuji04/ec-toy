@@ -2,14 +2,17 @@ package com.example.controller;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.domain.Item;
+import com.example.form.SortItemForm;
 import com.example.server.ShowItemService;
 
 /**
@@ -23,6 +26,12 @@ import com.example.server.ShowItemService;
 @Controller
 @RequestMapping("show-item")
 public class ShowItemController {
+	
+	@ModelAttribute
+	public SortItemForm setUpForm() {
+		return new SortItemForm();
+	}
+	
 	@Autowired
 	private ShowItemService itemService;
 	
@@ -33,7 +42,7 @@ public class ShowItemController {
 	 */
 	@RequestMapping("")
 	public String findAllItem(Model model) {
-		List<List<Item>>itemAllList=itemService.finadAllItem();
+		List<List<Item>>itemAllList=itemService.findAllItem();
 		model.addAttribute("itemAllList", itemAllList);
 		
 		return "item_list_toy";
@@ -52,6 +61,29 @@ public class ShowItemController {
 		model.addAttribute("itemAllList", itemAllList);
 		
 		return "item_list_toy";
+	}
+	
+	/**
+	 * @param sortValue 商品を並び替える.
+	 * @param model リクエストスコープ
+	 * @return　商品情報
+	 */
+	@RequestMapping("sortItem")
+	public String sortItem(SortItemForm form,Model model) {
+		System.out.println("form.get:"+form.getSortItem());
+		List<List<Item>> itemAllList=new ArrayList<>();
+		
+		if(form.getSortItem()==0) {
+			itemAllList=itemService.findAllItem();
+		}else if(form.getSortItem()==1) {
+			itemAllList=itemService.sortInDesc();
+			model.addAttribute("itemAllList", itemAllList);
+		}else if(form.getSortItem()==2) {
+			itemAllList=itemService.sortInAsc();
+			model.addAttribute("itemAllList", itemAllList);
+		}
+		return "item_list_toy";
+		
 	}
 	
 

@@ -1,8 +1,9 @@
 package com.example.form;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 import com.example.domain.OrderItem;
 import com.example.domain.User;
@@ -18,13 +19,22 @@ public class OrderForm {
 	private Integer userId;
 	private Integer status;
 	private Integer totalPrice;
-	private Date orderDate;
+	@NotBlank(message="配達日時は必須です")
+	private String orderDate;
+	@NotBlank(message="名前は必須です")
 	private String destinationName;
+	@NotBlank(message="Emailは必須です")
+	//@Email(message="Email形式で入力して下さい")
 	private String destinationEmail;
+	@NotBlank(message="郵便番号は必須です")
+	@Pattern(regexp="^[0-9]{3}-[0-9]{4}$",message="XXX-XXXXの形式で入力願います")
 	private String destinationZipcode;
+	@NotBlank(message="住所は必須です")
 	private String destinationAddress;
+	@NotBlank(message="電話番号は必須です")
+	@Pattern(regexp="^[0-9]{3}-[0-9]{4}-[0-9]{4}$",message="XXX-XXXX-XXXXの形式で入力願います")
 	private String destinationTel;
-	private Timestamp deliveryTime;
+	private String deliveryTime;
 	private Integer paymentMethod;
 	private User user;
 	private List<OrderItem>orderItemList;
@@ -56,10 +66,10 @@ public class OrderForm {
 	public void setTotalPrice(Integer totalPrice) {
 		this.totalPrice = totalPrice;
 	}
-	public Date getOrderDate() {
+	public String getOrderDate() {
 		return orderDate;
 	}
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
 	public String getDestinationName() {
@@ -92,10 +102,10 @@ public class OrderForm {
 	public void setDestinationTel(String destinationTel) {
 		this.destinationTel = destinationTel;
 	}
-	public Timestamp getDeliveryTime() {
+	public String getDeliveryTime() {
 		return deliveryTime;
 	}
-	public void setDeliveryTime(Timestamp deliveryTime) {
+	public void setDeliveryTime(String deliveryTime) {
 		this.deliveryTime = deliveryTime;
 	}
 	public Integer getPaymentMethod() {

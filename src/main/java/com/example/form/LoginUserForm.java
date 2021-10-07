@@ -1,4 +1,8 @@
 package com.example.form;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 /**
  * ログアウトユーザー情報のフォーム.
  * 
@@ -11,8 +15,11 @@ public class LoginUserForm {
 	/**ユーザー名*/
 	private String name;
 	/**メールアドレス*/
+	@Email(message="Eメール形式が不正です")
+	@NotBlank(message="Emailは必須です")
 	private String email;
 	/**パスワード*/
+	@NotBlank(message="パスワードは必須です")
 	private String password;
 	
 	public LoginUserForm() {

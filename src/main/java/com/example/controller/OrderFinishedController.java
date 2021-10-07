@@ -10,6 +10,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.domain.LoginUser;
@@ -27,6 +30,12 @@ import com.example.server.OrderService;
 @RequestMapping("order-finished")
 public class OrderFinishedController {
 	
+	@ModelAttribute
+	public OrderForm setUpForm() {
+		return new OrderForm();
+	}
+	
+	
 	@Autowired
 	private HttpSession session;
 	
@@ -38,9 +47,13 @@ public class OrderFinishedController {
 		return "order_finished";
 	}
 	
-	
+	/**
 	@RequestMapping("orderFinished")
-	public String orderFinished(OrderForm form,String deliveryData,String responsibleCompany,String status)throws Exception  {
+	public String orderFinished(@Validated OrderForm form,BindingResult result,String deliveryData,String responsibleCompany,String status)throws Exception  {
+		
+		if(result.hasErrors()) {
+			return "order-confirm";
+		}
 		
 		//Timestampの使い方を確認しながら記述、リクエストパラメーターで受け取ったデータと現在の日時を比較する
 		// System.out.println("deliveryData:"+deliveryData);
@@ -89,4 +102,5 @@ public class OrderFinishedController {
 		   
 		   return "redirect:";
 	}
+	*/
 }
