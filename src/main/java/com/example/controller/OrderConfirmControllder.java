@@ -17,9 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.domain.LoginUser;
 import com.example.domain.Order;
+import com.example.domain.User;
 import com.example.form.OrderForm;
-import com.example.form.UserForm;
 import com.example.server.OrderService;
+import com.example.server.UserService;
 
 /**
  * 注文確認情報のコントローラークラス.
@@ -30,10 +31,27 @@ import com.example.server.OrderService;
 @Controller
 @RequestMapping("order-confirm")
 public class OrderConfirmControllder {
+	
+	
+	@Autowired
+	public UserService userService;
 
 	@ModelAttribute
 	public OrderForm setUpForm() {
-		return new OrderForm();
+		
+		OrderForm orderForm=new OrderForm();
+		
+		LoginUser loginUser=(LoginUser)(session.getAttribute("loginUser"));
+		
+		User user=userService.load(loginUser.getId());
+		
+		
+				orderForm.setDestinationName(user.getName());
+				orderForm.setDestinationEmail(user.getEmail());
+				orderForm.setDestinationZipcode(user.getZipCode());
+				orderForm.setDestinationAddress(user.getAddress());
+				orderForm.setDestinationTel(user.getTelephone());
+		return orderForm;
 	}
 
 	@Autowired
@@ -128,6 +146,7 @@ public class OrderConfirmControllder {
 		}
 
 		orderService.update(order, order.getId());
+		
 
 		return "redirect:/order-finished";
 	}

@@ -200,7 +200,7 @@
 									<div>
 										<label style="color: red" th:errors="*{destinationName}">
 											名前を入力してください </label>
-									</div> <input name="destinationName" type="text">
+									</div> <input name="destinationName" placeholder="name" type="text" th:field="*{destinationName}">
 								</td>
 							</tr>
 							<tr>
@@ -210,7 +210,7 @@
 									<div>
 										<label style="color: red" th:errors="*{destinationEmail}">
 											メールアドレスを入力してください </label>
-									</div> <input name="destinationEmail" type="text">
+									</div> <input name="destinationEmail" th:field="*{destinationEmail}" type="text">
 								</td>
 							</tr>
 							<tr>
@@ -225,7 +225,7 @@
 										</div>
 								
 								<input name="destinationZipcode" id="zipcode" size="7"
-									type="text">&nbsp;&nbsp;
+									type="text" th:field="*{destinationZipcode}">&nbsp;&nbsp;
 									<button id="get_address_btn" type="button">住所取得</button></td>
 							</tr>
 							<tr>
@@ -240,7 +240,7 @@
 										</div>
 								
 								<input name="destinationAddress" id="address"
-									type="text" size="50"></td>
+									type="text" size="50" th:field="*{destinationAddress}"></td>
 							</tr>
 							<tr>
 								<td>
@@ -253,7 +253,7 @@
 											</label>
 										</div>
 								
-								<input name="destinationTel" type="text"></td>
+								<input name="destinationTel" type="text" th:field="*{destinationTel}"></td>
 							</tr>
 							<tr>
 								<td>
@@ -268,7 +268,7 @@
 											</div>
 											<div class="col-sm-5">
 												<input type="date" name="orderDate" id="name"
-													class="form-control input-sm" />
+													class="form-control input-sm" th:field="*{orderDate}" />
 											</div>
 
 										</div>
