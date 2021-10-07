@@ -194,41 +194,66 @@
 						<tbody>
 							<tr>
 								<td>
-								<span th:errors="*{destinationName}"></span>
 									<div class="text-center">お名前</div>
 								</td>
-								<td><input name="destinationName" type="text"></td>
+								<td>
+									<div>
+										<label style="color: red" th:errors="*{destinationName}">
+											名前を入力してください </label>
+									</div> <input name="destinationName" type="text">
+								</td>
 							</tr>
 							<tr>
 								<td>
-								<span th:errors="*{destinationEmail}"></span>
-									<div class="text-center">メールアドレス</div>
+									<div class="text-center">メールアドレス</div></td>
+								<td>
+									<div>
+										<label style="color: red" th:errors="*{destinationEmail}">
+											メールアドレスを入力してください </label>
+									</div> <input name="destinationEmail" type="text">
 								</td>
-								<td><input name="destinationEmail" type="text"></td>
 							</tr>
 							<tr>
 								<td>
-								<span th:errors="*{destinationZipcode}"></span>
-									<div class="text-center">郵便番号</div>
-								</td>
-								<td><input name="destinationZipcode" id="zipcode" size="7"
+									<div class="text-center">郵便番号</div></td>
+								<td>
+								
+								<div>
+									<label  style="color: red" th:errors="*{destinationZipcode}">
+												郵便番号を入力して下さい
+											</label>
+										</div>
+								
+								<input name="destinationZipcode" id="zipcode" size="7"
 									type="text">&nbsp;&nbsp;
 									<button id="get_address_btn" type="button">住所取得</button></td>
 							</tr>
 							<tr>
 								<td>
-								<span th:errors="*{destinationAddress}"></span>
-									<div class="text-center">住所</div>
-								</td>
-								<td><input name="destinationAddress" id="address"
+									<div class="text-center">住所</div></td>
+								<td>
+								
+								<div>
+											<label  style="color: red" th:errors="*{destinationAddress}">
+												住所を入力してください
+											</label>
+										</div>
+								
+								<input name="destinationAddress" id="address"
 									type="text" size="50"></td>
 							</tr>
 							<tr>
 								<td>
-								<span th:errors="*{destinationTel}"></span>
-									<div class="text-center">電話番号</div>
-								</td>
-								<td><input name="destinationTel" type="text"></td>
+									<div class="text-center">電話番号</div></td>
+								<td>
+								
+								<div>
+											<label  style="color: red" th:errors="*{destinationTel}">
+												電話番号を入力してください
+											</label>
+										</div>
+								
+								<input name="destinationTel" type="text"></td>
 							</tr>
 							<tr>
 								<td>
@@ -239,7 +264,7 @@
 										<div class="row">
 											<div class="col-sm-12">
 												<label class="control-label" style="color: red"
-													for="inputPeriod">配達日時を入力してください</label>
+													th:errors="*{orderDate}">配達日時を入力してください</label>
 											</div>
 											<div class="col-sm-5">
 												<input type="date" name="orderDate" id="name"
@@ -316,8 +341,7 @@
 											<label class="radio-inline"> <input type="radio"
 												name="status" th:value="2" checked="checked">
 												クレジットカード
-											</label><br>
-											<br>
+											</label><br> <br>
 										</div>
 									</div>
 								</td>
