@@ -14,7 +14,7 @@ public class UserForm {
 	private String email;
 	/**　パスワード */
 	@NotBlank(message="パスワードの入力は必須です")
-	@Pattern(regexp="(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\\d)(?=.*?[+-/_])[a-zA-Z\\d+-/_]{8,16}",message="8文字以上16文字以内で記入願います")
+	@Pattern(regexp="(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\\d)(?=.*?[+-/_])[a-zA-Z\\d+-/_]{8,16}",message="8文字以上16文字以内で小文字、大文字、記号(+-/_)を含んで記入願います")
 	private String password;
 	/** 郵便番号　*/
 	@NotBlank(message="郵便番号の入力は必須です")

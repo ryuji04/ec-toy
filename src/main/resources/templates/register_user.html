@@ -64,7 +64,7 @@
 									placeholder="Email"  th:field="*{email}">
 							</div>
 							<div class="form-group">
-								<label for="inputZipcode">郵便番号:</label>
+								<label for="inputZipcode">郵便番号(XXX-XXXX形式):</label>
 								<label
 								    th:errors="*{zipCode}"	class="control-label" style="color: red;font-weight:boal;" for="inputError">郵便番号を入力してください</label>
 									<input  type="button" id="get_address_btn" value="住所取得">
@@ -80,14 +80,14 @@
 									placeholder="Address" th:field="*{address}">
 							</div>
 							<div class="form-group">
-								<label for="inputTel">電話番号:</label>
+								<label for="inputTel">電話番号(XXX-XXXX-XXXX形式):</label>
 								<label
 									th:errors="*{telephone}" class="control-label" style="color: red;font-weight:boal;" for="inputError">電話番号を入力してください</label>
 								<input name="telephone" type="text" id="inputTel" class="form-control"
 									placeholder="Tel" th:field="*{telephone}">
 							</div>
 							<div class="form-group">
-								<label for="inputPassword">パスワード:</label>
+								<label for="inputPassword">パスワード(8文字以上16文字以下で小文字、大文字、記号(+-/_)を含む):</label>
 								<label
 									th:errors="*{password}" class="control-label" style="color: red;font-weight:boal;" for="inputError">パスワードを入力してください</label>
 								<input name="password" type="text" id="inputPassword" class="form-control"
