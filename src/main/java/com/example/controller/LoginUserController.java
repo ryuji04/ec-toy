@@ -50,11 +50,10 @@ public class LoginUserController {
 		
 		
 		if(loginUser==null) {
-			result.rejectValue("email",null,"メールアドレスまたはパスワードが違います");
+			result.rejectValue("email",null,"Emailとパスワードが異なります");
 		}
 		
 		if(result.hasErrors()) {
-			System.out.println("error:");
 			return "login";
 		}
 		
