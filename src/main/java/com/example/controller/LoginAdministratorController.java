@@ -4,6 +4,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -20,15 +22,16 @@ import com.example.server.AdministratorService;
  */
 @Controller
 @RequestMapping("/login-administrator")
-public class Login_AdministratorController {
+public class LoginAdministratorController {
 	
-	@Autowired
-	private HttpSession session;
-
 	@ModelAttribute
 	private LoginAdministratorForm setUpForm() {
 		return new LoginAdministratorForm();
 	}
+	
+	@Autowired
+	private HttpSession session;
+
 
 	@Autowired
 	private AdministratorService administratorService;
@@ -39,28 +42,31 @@ public class Login_AdministratorController {
 	}
 
 	@RequestMapping("login")
-	public String login(LoginAdministratorForm form) {
+	public String login(@Validated LoginAdministratorForm form,BindingResult result) {
+		
+		Administrator administrator = administratorService.findByEmailAndPassword(form.getEmail(), form.getPassword());
+		
+		if (administrator == null) {
+			result.rejectValue("email", null,"Emailまたはパスワードが異なります");
+		}
 		
 		
+		if(result.hasErrors()) {
+			return "login_administrator";
+		}
 		
 		LoginUser loginUser=(LoginUser)(session.getAttribute("loginUser"));
 		
 		if(loginUser!=null) {
 			session.removeAttribute("loginUser");
-			return "confirm_administrator";
+			return "distinguish_administrator";
 		}
 		
 
-		Administrator administrator = administratorService.findByEmailAndPassword(form.getEmail(), form.password);
+		
 
-		System.out.println("administrator:"+administrator);
-		if (administrator == null) {
-			
-			
-			return "forward:/login-administrator";
-		}
 
-		return "done";
+		return "select_administrator";
 
 	}
 
