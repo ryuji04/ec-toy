@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ラクラクトイ</title>
+<link href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}"
+	rel="stylesheet">
+<link href="../static/css/piza.css" rel="stylesheet">
+</head>
+<body>
+
+	<div align="center">
+	
+	<h1>管理者だけがログイン出来ます。</h1>
+	<br>
+
+	<form method="post" th:action="@{/login-administrator}">
+	<button class="form-control btn btn-warning btn-block" style="width:20%;">管理者の方はこちらをクリック</button>
+	</form>
+	<br>
+	<br>
+
+	<form method="post" th:action="@{/login-user}">
+	<button class="form-control btn btn-warning btn-block" style="width:20%;">ユーザーの方はこちらをクリック</button>
+	</form>
+	
+	</div>
+</body>
+</html>

@@ -36,7 +36,6 @@ public class LoginUserRepository {
 		String Sql
 		="SELECT id,name,email,password FROM users WHERE email=:email AND password=:password";
 		
-		System.out.println("email:"+email);
 		SqlParameterSource param
 		=new MapSqlParameterSource().addValue("email",email).addValue("password",password);		
 		List<LoginUser>loginUserList=template.query(Sql,param,LOGINUSER_ROW_MAPPER);

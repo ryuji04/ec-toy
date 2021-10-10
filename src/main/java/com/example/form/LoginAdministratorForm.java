@@ -1,4 +1,8 @@
 package com.example.form;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 /**
  * ログインしている管理者情報のフォーム.
  * 
@@ -6,10 +10,16 @@ package com.example.form;
  *
  */
 public class LoginAdministratorForm {
+	
 	/**メールアドレス*/
-	public String email;
+	@Email(message="Eメール形式が不正です")
+	@NotBlank(message="Emailは必須です")
+	private String email;
+	
 	/**パスワード*/
-	public String password;
+	@NotBlank(message="パスワードは必須です")
+	private String password;
+	
 	public String getEmail() {
 		return email;
 	}

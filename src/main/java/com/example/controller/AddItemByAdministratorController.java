@@ -1,10 +1,9 @@
 package com.example.controller;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,8 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.domain.Item;
 import com.example.form.ItemForm;
-import com.example.form.MultipartFileForm;
 import com.example.server.ItemService;
+import com.example.server.ShowItemService;
 
 /**
  * 管理者が商品を使いするコントローラークラス.
@@ -34,6 +33,9 @@ public class AddItemByAdministratorController {
 	
 	@Autowired
 	private ItemService itemService;
+	
+	@Autowired
+	private ShowItemService showItemService;
 
 	@RequestMapping("")
 	public String index() {
@@ -45,11 +47,21 @@ public class AddItemByAdministratorController {
 			throws Exception {
 		if (!multipartFile.isEmpty()) {
 			try {
-				// ファイル名を社員番号にリネイム
+				// ファイル名をリネイム
 				File oldFileName = new File(multipartFile.getOriginalFilename());
-				File newFileName = new File(multipartFile.getOriginalFilename() + ".jpg");
+				
+				int itemId=0;
+				
+				List<Item>itemList=itemService.findAll();
+				for(Item item:itemList) {
+					itemId=item.getId();
+				}
+				
+				
+				
+				File newFileName = new File(itemId+1 + ".jpg");
 				oldFileName.renameTo(newFileName);
-				System.out.print("oldFileName:"+oldFileName);
+
 				// 保存先を定義
 				String uploadPath = "src/main/resources/static/img_toy/";
 				byte[] bytes = multipartFile.getBytes();
@@ -65,10 +77,8 @@ public class AddItemByAdministratorController {
 				item.setDescription(form.getDescription());
 				item.setPrice_m(form.getPrice_m());
 				item.setPrice_l(form.getPrice_l());
-				item.setImage_path(oldFileName.getName());
+				item.setImage_path(newFileName.getName());
 				itemService.insertItem(item);
-				
-				System.out.println("item:"+item);
 				
 
 			} catch (Exception e) {
@@ -77,7 +87,7 @@ public class AddItemByAdministratorController {
 
 		}
 
-		return "forward:/add-item-administrator";
+		return "forward:/add_item_administrator";
 
 	}
 }

@@ -39,7 +39,9 @@ public class ShowItemService {
 		List<Item>itemList=itemRepository.findAll();
 		
 		
+		
 		List<List<Item>> itemAll = setItemList(perfectItemlList,listInThreeItem,itemList);
+		
 		
 		return itemAll;
 	}
@@ -59,7 +61,6 @@ public class ShowItemService {
 				List<Item> listInThreeItem=new ArrayList<>();
 		
 		List<Item>itemListFromName=itemRepository.findLikeName(name);
-		System.out.println("itemListFromName"+itemListFromName);
 		
 		List<List<Item>> itemAll = setItemList(perfectItemlList,listInThreeItem,itemListFromName);
 		
@@ -85,11 +86,21 @@ public class ShowItemService {
 					if((i+1)%3==0) {
 						perfectItemlList.add(listInThreeItem);
 						listInThreeItem=new ArrayList<>();
+						
+						
 					}
 					
-					if(itemList.size()%3!=0) {
+					//perfectItemListに入らなかった最後の商品を入れるように記述
+					if(i==itemList.size()-1&&i>itemList.size()-2){
 						perfectItemlList.add(listInThreeItem);
 					}
+					
+					/**
+					if(itemList.size()%3!=0) {
+						listInThreeItem.add(itemList.get(itemList.size()-1));
+						perfectItemlList.add(listInThreeItem);
+					}
+					*/
 					
 							}
 				

@@ -56,32 +56,36 @@
 	</div>
 	<!-- ここまでがヘッダー部分 -->
 
-	<h1>商品追加画面</h1>
+	<div align="center">
 
-	<form action="" th:action="@{/add-item-administrator/add}"
-		method="post" enctype="multipart/form-data" th:object="${item}">
+		<h1>商品追加画面</h1>
 
-		<label for="name"> 商品名: <input type="text" name="name"
-			id="name">
-		</label><br> <label for="description"> 商品説明: <input type="text"
-			name="description" id="description">
-		</label><br> <label for="price_m"> Mサイズ価格: <input type="text"
-			name="price_m" id="price_m">
-		</label><br> <label for="price_l"> Lサイズ価格: <input type="text"
-			name="price_l" id="price_l">
-		</label><br> <label for="image_path"> 画像パス: <input type="text"
-			name="image_path" id="image_path">
-		</label><br>
+		<form  th:action="@{/add-item-administrator/add}"
+			method="post"  enctype="multipart/form-data" th:object="${item}">
 
+			<label for="name"> 商品名: <input type="text" name="name"
+				id="name">
+			</label><br> <br> <label for="description"> 商品説明: <textarea
+				cols="23" rows="5" name="description" id="description"></textarea>
 
-			<p>画像ファイルをアップロード</p>
-			<input type="file" name="multipartFile"> 
+			</label><br> <br> <label for="price_m"> Mサイズ価格: <input
+				type="text" name="price_m" id="price_m">
+			</label><br> <br> <label for="price_l"> Lサイズ価格: <input
+				type="text" name="price_l" id="price_l">
+			</label><br> <br>
 
 
-		<button>追加</button>
+			<p>商品画像ファイルをアップロード</p>
+			<input type="file" name="multipartFile"> <br>
 
-	</form>
+			<button class="btn btn-primary">商品を追加</button>
+		</form>
+			<br>
+			<form th:action="@{/confirm-for-item}" method="post">
+			<button class="btn btn-primary">追加した商品の確認</button>
+			</form>
 
+	</div>
 
 </body>
 </html>

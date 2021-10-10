@@ -36,6 +36,7 @@
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<p class="navbar-text navbar-right">
+						<a th:href="@{/distinguish-administrator}" class="navbar-link">管理者画面へ</a>
 						<a href="cart_list.html" th:href="@{/show-cart}" class="navbar-link">ショッピングカート</a>&nbsp;&nbsp;
 					</p>
 				</div>
@@ -50,7 +51,7 @@
 				class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12">
 				<div class="well">
 					<form method="post" action="item_list_pizza.html"
-						th:action="@{/login-user/login}" th:object=${loginUserForm}>
+						th:action="@{/login-user/login}" th:object="${loginUserForm}">
 						<fieldset>
 							<legend> ログイン </legend>
 							<!-- 
