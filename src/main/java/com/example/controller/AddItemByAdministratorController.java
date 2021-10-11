@@ -30,10 +30,10 @@ public class AddItemByAdministratorController {
 	private Item setUpForm() {
 		return new Item();
 	}
-	
+
 	@Autowired
 	private ItemService itemService;
-	
+
 	@Autowired
 	private ShowItemService showItemService;
 
@@ -43,23 +43,20 @@ public class AddItemByAdministratorController {
 	}
 
 	@RequestMapping("add")
-	public String add(ItemForm form,MultipartFile multipartFile, Model model)
-			throws Exception {
+	public String add(ItemForm form, MultipartFile multipartFile, Model model) throws Exception {
 		if (!multipartFile.isEmpty()) {
 			try {
 				// ファイル名をリネイム
 				File oldFileName = new File(multipartFile.getOriginalFilename());
-				
-				int itemId=0;
-				
-				List<Item>itemList=itemService.findAll();
-				for(Item item:itemList) {
-					itemId=item.getId();
+
+				int itemId = 0;
+
+				List<Item> itemList = itemService.findAll();
+				for (Item item : itemList) {
+					itemId = item.getId();
 				}
-				
-				
-				
-				File newFileName = new File(itemId+1 + ".jpg");
+
+				File newFileName = new File(itemId + 1 + ".jpg");
 				oldFileName.renameTo(newFileName);
 
 				// 保存先を定義
@@ -71,15 +68,15 @@ public class AddItemByAdministratorController {
 						new FileOutputStream(new File(uploadPath + newFileName)));
 				stream.write(bytes);
 				stream.close();
-				
-				Item item=new Item();
+
+				//リクエストパラメーターで送られてきた情報をItemドメインにセットしてDBにインザート
+				Item item = new Item();
 				item.setName(form.getName());
 				item.setDescription(form.getDescription());
 				item.setPrice_m(form.getPrice_m());
 				item.setPrice_l(form.getPrice_l());
 				item.setImage_path(newFileName.getName());
 				itemService.insertItem(item);
-				
 
 			} catch (Exception e) {
 				System.out.println(e);
@@ -87,7 +84,7 @@ public class AddItemByAdministratorController {
 
 		}
 
-		return "forward:/add_item_administrator";
+		return "redirect:/add-item-administrator";
 
 	}
 }
