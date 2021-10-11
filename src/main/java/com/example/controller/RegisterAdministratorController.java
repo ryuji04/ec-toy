@@ -3,6 +3,8 @@ package com.example.controller;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,8 +23,8 @@ import com.example.server.AdministratorService;
 public class RegisterAdministratorController {
 	
 	@ModelAttribute
-	private Administrator setUpForm() {
-		return new Administrator();
+	private AdministratorForm setUpForm() {
+		return new AdministratorForm();
 	}
 	
 	@Autowired
@@ -34,7 +36,12 @@ public class RegisterAdministratorController {
 	}
 
 	@RequestMapping("register")
-	public String register(AdministratorForm form) {
+	public String register(@Validated AdministratorForm form,BindingResult result) {
+		
+		
+		if(result.hasErrors()) {
+			return "register_administrator";
+		}
 		
 		Administrator administrator=new Administrator();
 		

@@ -1,4 +1,9 @@
 package com.example.form;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 /**
  * 管理者情報のフォーム.
  * 
@@ -9,10 +14,14 @@ public class AdministratorForm {
 	/**ID*/
 	public Integer id;
 	/**名前*/
+	@NotBlank(message="名前は必須です")
 	public String name;
 	/**メールアドレス*/
+	@NotBlank(message="Emailは必須です")
+			@Email(message="Email形式で入力願います")
 	public String email;
 	/**パスワード*/
+	@Pattern(regexp="(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])[a-zA-Z0-9]{8,16}",message="8文字以上16文字以下で小文字、大文字、数字を含んで記入願います")
 	public String password;
 	/**確認用パスワード*/
 	public String conifirmPassword;
