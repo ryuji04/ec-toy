@@ -46,7 +46,7 @@ public class OrderRepository {
 		while (rs.next()) {
 			int nowId = rs.getInt("o_id");
 
-			
+			//1つ前のIDと今のIDが異なていたらorderの情報を取得
 			if (beforeId != nowId) {
 				Order order = new Order();
 				order.setId(rs.getInt("o_id"));
